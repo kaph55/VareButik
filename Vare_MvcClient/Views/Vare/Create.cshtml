@@ -1,0 +1,25 @@
+﻿@model Vare_Mvc.Models.VareViewModel
+
+<h2>Tilføj ny vare</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label asp-for="Navn" class="form-label"></label>
+        <input asp-for="Navn" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Pris" class="form-label"></label>
+        <input asp-for="Pris" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Antal" class="form-label"></label>
+        <input asp-for="Antal" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="imageFile" class="form-label">Vælg billede</label>
+        <input type="file" name="imageFile" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Gem vare</button>
+</form>
+

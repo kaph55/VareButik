@@ -1,0 +1,55 @@
+﻿@model List<Vare_Mvc.Models.KurvItemViewModel>
+
+<div class="container p-4">
+    <h2>Din Kurv</h2>
+
+    @if (!Model.Any())
+    {
+        <p>Kurven er tom.</p>
+        <a asp-controller="Vare" asp-action="Index" class="btn btn-primary">Se varer</a>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Billede</th>
+                    <th>Navn</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
+                    <th>Subtotal</th>
+                    <th>Handling</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (item.ImageData != null)
+                            {
+                                <img src="data:image/png;base64,@Convert.ToBase64String(item.ImageData)" width="50" height="50" />
+                            }
+                        </td>
+                        <td>@item.VareNavn</td>
+                        <td>@item.Pris kr.</td>
+                        <td>@item.Antal</td>
+                        <td>@(item.Pris* item.Antal) kr.</td>
+                        <td>
+                            <a asp-controller="Kurv" asp-action="Remove" asp-route-id="@item.VareId" class="btn btn-sm btn-danger">Fjern</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <p><strong>Total: @Model.Sum(v => v.Pris * v.Antal) kr.</strong></p>
+
+        @* <form asp-controller="Køb" asp-action="AddPurchase" method="post">
+            <input type="hidden" name="varer" value="@Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model))" />
+            <button type="submit" class="btn btn-success">Køb varer</button>
+        </form> *@
+        <a asp-controller="Kurv" asp-action="Buy" class="btn btn-success">Køb varer</a>
+        <a asp-controller="Vare" asp-action="Index" class="btn btn-secondary">Fortsæt shopping</a>
+    }
+</div>

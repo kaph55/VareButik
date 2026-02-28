@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Vare_Mvc.Models.VareViewModel>
+
+<div class="container p-4">
+    <h2>Varer</h2>
+
+    <div class="mb-3">
+        <a asp-controller="Vare" asp-action="Create" class="btn btn-success">Tilføj ny vare</a>
+    </div>
+
+    <table class="table table-striped align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Billede</th>
+                <th>Navn</th>
+                <th>Pris</th>
+                <th>Antal</th>
+                <th>Handling</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var v in Model)
+            {
+                <tr>
+                    <td>
+                        @if (v?.ImageData != null)
+                        {
+                            <img src="data:image/png;base64,@Convert.ToBase64String(v.ImageData)"
+                                 width="60" height="60" class="img-thumbnail" />
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    </td>
+                    <td>@v.Navn</td>
+                    <td>@v.Pris kr.</td>
+                    <td>@v.Antal</td>
+                    <td>
+                        <a asp-controller="Kurv" asp-action="Add" asp-route-id="@v.Id" class="btn btn-sm btn-primary">Læg i Kurv</a>
+                        <a asp-controller="Vare" asp-action="Edit" asp-route-id="@v.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-controller="Vare" asp-action="Delete" asp-route-id="@v.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

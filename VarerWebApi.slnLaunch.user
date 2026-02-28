@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "VarerWebApi\\VarerWebApi.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Vare_MvcClient\\Vare_Mvc.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

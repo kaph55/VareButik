@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="da">
+<head>
+    <title>@ViewData["Title"] - VareShop</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    @if (Context.Session.GetString("User") != null)
+    {
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-3">
+                    <div class="container">
+                        <!-- Brand -->
+                        <a class="navbar-brand" asp-controller="Vare" asp-action="Index">VareShop</a>
+
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <!-- Left side menu -->
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Vare" asp-action="Index">Varer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Kurv" asp-action="Index">Kurv</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Køb" asp-action="History">Mine køb</a>
+                                </li>
+                            </ul>
+
+                            <!-- Right side menu -->
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link text-danger" asp-controller="User" asp-action="Logout">Log ud</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+    }
+
+                <!-- Main content -->
+                <div class="container">
+                    @RenderBody()
+                </div>
+
+                <footer class="bg-light text-center py-3 mt-4 border-top">
+                    &copy; @DateTime.Now.Year VareShop
+                </footer>
+
+                <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

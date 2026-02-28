@@ -1,0 +1,50 @@
+﻿@model List<Vare_Mvc.Models.KøbViewModel>
+
+<div class="container p-4">
+    <h2>Mine køb</h2>
+
+    @if (!Model.Any())
+    {
+        <p>Du har ikke foretaget nogen køb endnu.</p>
+        <a asp-controller="Vare" asp-action="Index" class="btn btn-primary">Se varer</a>
+    }
+    else
+    {
+        @foreach (var køb in Model)
+        {
+            <div class="mb-3 p-3 border">
+                <p><strong>Købsdato:</strong> @køb.KøbsDato.ToString("dd/MM/yyyy HH:mm")</p>
+                <p><strong>Total:</strong> @køb.TotalPris kr.</p>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Billede</th>
+                            <th>Navn</th>
+                            <th>Pris</th>
+                            <th>Antal</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in køb.Varer)
+                        {
+                            <tr>
+                                <td>
+                                    @if (item.ImageData != null)
+                                    {
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(item.ImageData)" width="50" height="50" />
+                                    }
+                                </td>
+                                <td>@item.VareNavn</td>
+                                <td>@item.Pris kr.</td>
+                                <td>@item.Antal</td>
+                                <td>@(item.Pris* item.Antal) kr.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+</div>
